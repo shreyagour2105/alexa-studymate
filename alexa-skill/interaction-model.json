@@ -1,0 +1,15 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "study mate",
+      "intents": [
+        { "name": "AskStudyMateIntent", "slots": [{ "name": "question", "type": "AMAZON.SearchQuery" }], "samples": ["ask {question}", "help me with {question}", "explain {question}", "I need help with {question}"] },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.FallbackIntent", "samples": [] }
+      ],
+      "types": []
+    }
+  }
+}

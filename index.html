@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Alexa+ StudyMate</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">✦</div><div><strong>StudyMate</strong><small>powered by Alexa+ concept</small></div></div>
+      <div class="profile"><div class="avatar">S</div><div><strong>Student workspace</strong><small>Your learning hub</small></div></div>
+      <nav>
+        <button class="nav-item active" data-view="home">⌂ <span>Overview</span></button>
+        <button class="nav-item" data-view="tasks">☷ <span>Assignments</span><span class="nav-count" id="navTaskCount">0</span></button>
+        <button class="nav-item" data-view="planner">▦ <span>Study planner</span></button>
+        <button class="nav-item" data-view="assistant">✧ <span>Ask StudyMate</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="mini-orb">✦</div><p><strong>A little progress, daily.</strong><br><small>Your next step is enough.</small></p></div>
+      <div class="sidebar-foot">STUDYMATE · DEMO BUILD 01</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><span class="eyebrow" id="todayLabel">YOUR STUDY SPACE</span><h1 id="pageTitle">Good morning, student <span class="wave">✦</span></h1><p class="muted" id="pageSubtitle">Let's make today feel a little more manageable.</p></div>
+        <button class="icon-button" id="themeButton" title="Toggle appearance">◐</button>
+      </header>
+
+      <section id="homeView" class="view">
+        <div class="hero">
+          <div class="hero-copy"><div class="pill"><span class="pulse"></span> YOUR AI STUDY COMPANION</div><h2>One clear plan.<br><em>Less last-minute chaos.</em></h2><p>Plan your work, untangle your deadlines, and get moving with StudyMate.</p><button class="primary-button" data-go="assistant">✧ Talk to StudyMate <span>→</span></button></div>
+          <div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb-core">✦</div><div class="float-card card-a">✧ <span>Plan my day</span></div><div class="float-card card-b">✓ <span>Stay on track</span></div><div class="float-card card-c">⌁ <span>One step at a time</span></div></div>
+        </div>
+        <div class="section-heading"><div><h2>Your day at a glance</h2><p class="muted">A small plan beats a perfect plan you never start.</p></div><button class="text-button" data-go="planner">Open planner ↗</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon violet">☷</div><span class="muted">Open tasks</span><strong id="openTaskStat">0</strong><small>Keep them moving</small></article>
+          <article class="stat-card"><div class="stat-icon blue">✓</div><span class="muted">Completed</span><strong id="doneTaskStat">0</strong><small>Progress counts</small></article>
+          <article class="stat-card"><div class="stat-icon peach">◷</div><span class="muted">Next deadline</span><strong id="nextDeadlineStat">—</strong><small id="nextDeadlineSub">Add an assignment</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-head"><div><h3>Today's focus</h3><p class="muted">Your next useful steps</p></div><button class="small-button" data-go="tasks">+ Add task</button></div><div id="homeTaskList" class="task-list"></div></article>
+          <article class="panel assistant-panel"><div class="panel-head"><div><h3>Ask StudyMate</h3><p class="muted">Your study co-pilot</p></div><div class="tiny-orb">✦</div></div><div class="suggestions"><button data-prompt="Help me plan a balanced study day">Plan my day <span>↗</span></button><button data-prompt="Help me revise a difficult topic">Revise a topic <span>↗</span></button><button data-prompt="Give me a 25-minute focus session plan">Start a focus session <span>↗</span></button></div><button class="secondary-button full" data-go="assistant">Open conversation →</button></article>
+        </div>
+      </section>
+
+      <section id="tasksView" class="view hidden">
+        <div class="section-heading"><div><h2>Assignments</h2><p class="muted">Capture every task before it escapes into the void.</p></div></div>
+        <form id="taskForm" class="panel task-form">
+          <label>Assignment or task<input id="taskTitle" required maxlength="100" placeholder="e.g. Revise arrays in C" /></label>
+          <label>Subject<input id="taskSubject" maxlength="40" placeholder="e.g. Programming in C" /></label>
+          <label>Due date<input id="taskDue" type="date" /></label>
+          <label>Priority<select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></label>
+          <button class="primary-button" type="submit">+ Add assignment</button>
+        </form>
+        <div class="filter-row"><div class="filter-tabs"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="open">To do</button><button class="filter" data-filter="done">Completed</button></div><span class="muted" id="taskCountLabel">0 assignments</span></div>
+        <div id="allTaskList" class="panel task-list large-list"></div>
+      </section>
+
+      <section id="plannerView" class="view hidden">
+        <div class="section-heading"><div><h2>Study planner</h2><p class="muted">Build a realistic plan around your energy, not your fantasy productivity levels.</p></div></div>
+        <div class="planner-grid">
+          <article class="panel"><div class="panel-head"><div><h3>Make a focus plan</h3><p class="muted">A lightweight session structure</p></div><span class="stat-icon violet">◷</span></div>
+            <label class="stack-label">What are you studying?<input id="focusTopic" placeholder="e.g. C pointers" /></label>
+            <label class="stack-label">Available time<select id="focusDuration"><option value="25">25 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></label>
+            <label class="stack-label">Goal for this session<input id="focusGoal" placeholder="e.g. solve 3 practice problems" /></label>
+            <button class="primary-button" id="generatePlan">Create my plan ✦</button>
+            <div id="focusPlanResult" class="plan-result hidden"></div>
+          </article>
+          <article class="panel"><div class="panel-head"><div><h3>Suggested rhythm</h3><p class="muted">Use or adapt this template</p></div></div><div class="rhythm"><div><span>01</span><p><strong>Settle in</strong><small>2 min · Pick one goal and silence distractions.</small></p></div><div><span>02</span><p><strong>Focus block</strong><small>20–45 min · Work on one thing only.</small></p></div><div><span>03</span><p><strong>Active recall</strong><small>5 min · Explain it without looking at notes.</small></p></div><div><span>04</span><p><strong>Reset</strong><small>5 min · Stretch, hydrate, then decide what's next.</small></p></div></div></article>
+        </div>
+        <article class="panel week-panel"><div class="panel-head"><div><h3>This week's intention</h3><p class="muted">Choose one small habit to protect</p></div></div><div class="week-days" id="weekDays"></div><p class="muted week-note">Demo planner: your selected day is a visual reminder, not a calendar sync.</p></article>
+      </section>
+
+      <section id="assistantView" class="view hidden">
+        <div class="chat-layout">
+          <div class="chat-intro"><div class="large-orb">✦</div><span class="eyebrow">ALEXA+ INSPIRED · STUDYMATE</span><h2>Let's figure it<br/><em>out together.</em></h2><p class="muted">Ask for a plan, a revision strategy, or a way to break a big task into smaller steps.</p><div class="voice-note">🎙 Voice input uses your browser's speech recognition when supported. This is a hackathon prototype, not an official Amazon Alexa service.</div></div>
+          <div class="chat-panel panel"><div class="chat-head"><div class="tiny-orb">✦</div><div><strong>StudyMate</strong><small><span class="online-dot"></span> Ready to help</small></div><button id="speakButton" class="text-button" type="button" title="Toggle spoken AI replies" aria-pressed="true">🔊 Voice on</button><button id="clearChat" class="text-button">Clear</button></div><div id="chatMessages" class="chat-messages"><div class="message assistant"><div class="message-avatar">✦</div><div class="bubble">Hi! I'm StudyMate. I can help you plan a study session, organize assignments, or make a revision strategy. What's on your mind?</div></div></div><div class="chat-suggestions"><button data-prompt="Help me plan my day">Plan my day</button><button data-prompt="Break a big assignment into steps">Break down a task</button><button data-prompt="Give me a revision strategy">Revision strategy</button></div><form id="chatForm" class="chat-input"><input id="chatInput" autocomplete="off" placeholder="Ask StudyMate anything about studying…" /><button type="button" id="micButton" class="mic-button" title="Use voice input">🎙</button><button class="send-button" type="submit" aria-label="Send message">↑</button></form><div class="chat-foot">AI replies use your configured backend. Voice features depend on browser support and microphone permission.</div></div>
+        </div>
+      </section>
+      <footer>Alexa+ StudyMate concept · Student productivity prototype · Not affiliated with Amazon</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
